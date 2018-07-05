@@ -1,0 +1,19 @@
+{
+  "name": "react-boilerplate",
+  "version": "1.0.0",
+  "description": "My boilerplate for plain React projects. Includes patterns and utils for using inline styles and state management",
+  "repository": "git@github.com:JonathonAshworth/react-boilerplate.git",
+  "author": "Jonathon Ashworth <jonathonashworth@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.8.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0"
+  },
+  "scripts": {
+    "dev-server": "parcel src/index.html"
+  }
+}
