@@ -15,7 +15,8 @@
           it's fairly self-explanatory.
 */
 
-import { priceList } from './data.js'
+import { productPriceList } from './data.js'
+import { productSetAddRemove } from '../utils/productSet.js'
 
 /*
     ProductSet: dict { string (productId): number (quantity) }
@@ -31,7 +32,7 @@ const pricingRules = [
     {
         customerId: 'Unilever',
         productSet: { classic: 3 },
-        price: priceList.classic * 2,
+        price: productPriceList.classic * 2,
         requirements: [],
     },
     {
@@ -48,7 +49,7 @@ const pricingRules = [
     },
 ]
 
-/* cart: ProductSet */
-const applyPricingRules = (customerId, cart) => {
-    
+// cart: ProductSet
+const calculateCartCost = (customerId, cart) => {
+
 }
