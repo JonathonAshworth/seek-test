@@ -10,8 +10,8 @@
           your algorithms read closer to an English description of your requirements rather
           than some abstract mathematical equation. I don't have a strong opinion either way
           on this one, just thought the trade-off was interesting.
-        - In a real app with lots of code I'd likely have objectFilter in it's own file
-          for re-use, since it's not as related as the other functions and would likely be
+        - In a real app with lots of code I'd likely have objectFilter in it's own file,
+          since it's not as related as the other functions and would likely be
           re-used elsewhere (or more likely I'd be using lodash's pickBy...)
 */
 
@@ -27,9 +27,7 @@
             ({ premium: 3 }, 'premium', -4) => ({})
 */
 export const productSetAddRemove(dict, productId, delta) => {
-    const newDict = {
-        ...dict,
-    }
+    const newDict = { ...dict }
 
     if (newDict.hasOwnProperty(productId)) {
         newDict[productId] = newInv[productId] += delta
@@ -40,10 +38,16 @@ export const productSetAddRemove(dict, productId, delta) => {
     return objectFilter(dict, i => i !== 0)
 }
 
-// Performs a B diff A (aka B\A as per set theory) on a product set
-export const productSetDifference(b, a) => {
 
-}
+// Immutably performs a B diff A (aka B\A) on a product set
+export const productSetDifference(b, a) =>
+    Object.entries(a).reduce((prev, [k,v]) => productSetAddRemove(prev, k, v), b)
+
+
+// Checks to see if A is a subset of B (i.e B contains A)
+export const productSetContains(b, a) =>
+    Object.entries(a).every(([k,v]) => b[k] && b[k] >= v)
+
 
 const objectFilter = (obj, filterFunc) =>
     Object.entries(obj)

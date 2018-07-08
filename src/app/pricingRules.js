@@ -55,18 +55,24 @@ const pricingRules = [
 // their standard rate
 const calculateCartCost = (customerId, cart) => {
 
-    const _calculateCartCost = (remaining, accCost) => {
+    const applyPricingRules = (remaining, accCost) => {
         const ruleMatch = pricingRules.find(rule =>
             rule.customerId === customerId
             && productSetContains(remaining, rule.requirements)
             && productSetContains(remaining, rule.productSet)
         )
-        if (!ruleMatch) return accCost
-        return _calculateCartCost(
+
+        if (!ruleMatch) return { remaining, accCost }
+
+        return applyPricingRules(
             productSetDifference(remaining, ruleMatch.productSet),
             accCost + ruleMatch.price
         )
     }
 
-    return _calculateCartCost(cart.slice(), 0)
+    const { remaining, accCost: specialsCost } = applyPricingRules(cart.slice(), 0)
+    const remainingCost = Object.entries(remaining)
+        .map(([k,v]) => productPriceList[k] * v)
+        .reduce((acc, x) => x + acc, 0) // sum
+    return specialsCost + remainingCost
 }
