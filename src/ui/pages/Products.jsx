@@ -1,6 +1,6 @@
 import React from 'react'
 
-import composeStyledComponent from '../utils/composeStyledComponent.jsx'
+import composeStyledComponent from '../../utils/composeStyledComponent.jsx'
 
 
 const productTypes = [
@@ -19,18 +19,21 @@ const featureStrings = [
 
 const Products = ({ styles }) =>
     <div style={styles.container}>
-        {productTypes.map(productType =>
-            <div key={productType.name} style={styles.product}>
-                <h1>{productType.name}</h1>
-                {featureStrings.map((featureString, index) =>
-                    <div key={featureString} style={styles.feature}>
-                        <div style={styles.icon}>{productType.features[index] ? '✔' : '✘'}</div>
-                        <p>{featureString}</p>
-                    </div>
-                )}
-                <button style={styles.button}>Add to Cart</button>
-            </div>
-        )}
+        <div style={styles.productContainer}>
+            {productTypes.map(productType =>
+                <div key={productType.name} style={styles.product}>
+                    <h1>{productType.name}</h1>
+                    {featureStrings.map((featureString, index) =>
+                        <div key={featureString} style={styles.feature}>
+                            <div style={styles.icon}>{productType.features[index] ? '✔' : '✘'}</div>
+                            <p>{featureString}</p>
+                        </div>
+                    )}
+                    <button style={styles.button}>Add to Cart</button>
+                </div>
+            )}
+        </div>
+        <button style={styles.button}>Go To Cart (n items)</button>
     </div>
 
 
@@ -38,6 +41,13 @@ const styles = props => ({
 
     container: {
         height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+
+    productContainer: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

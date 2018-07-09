@@ -1,8 +1,11 @@
 import React from 'react'
 
-import Products from './Products.jsx'
-import Cart from './Cart.jsx'
-import UserSelect from './UserSelect.jsx'
+import history from '../utils/history.js'
+
+import Products from './pages/Products.jsx'
+import Cart from './pages/Cart.jsx'
+import UserSelect from './pages/UserSelect.jsx'
+
 
 const pages = {
     '/': Products,
@@ -10,11 +13,27 @@ const pages = {
     '/userselect': UserSelect,
 }
 
+const FourOhFour = () => <div>Invalid Route</div>
 
-const App = ({ pathname }) => {
-    const RouteComponent = pages[pathname]
-    // No 404 handling for now
-    return <RouteComponent />
+
+class App extends React.Component {
+
+    constructor (props) {
+        super(props)
+        this.state = { pathname: props.pathname }
+    }
+
+    componentDidMount () {
+        history.onChange(
+            pathname => { this.setState({ pathname }) }
+        )
+    }
+
+    render () {
+        const RouteComponent = pages[this.state.pathname] || FourOhFour
+        return <RouteComponent />
+    }
+
 }
 
 export default App

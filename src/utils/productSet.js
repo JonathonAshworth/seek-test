@@ -8,7 +8,7 @@
         - Handling of negatives
             ({ premium: 3 }, 'premium', -4) => ({})
 */
-export const productSetAddRemove(dict, productId, delta) => {
+export const productSetAddRemove = (dict, productId, delta) => {
     const newDict = { ...dict }
 
     if (newDict.hasOwnProperty(productId)) {
@@ -22,12 +22,12 @@ export const productSetAddRemove(dict, productId, delta) => {
 
 
 // Immutably performs a B diff A (aka B\A) on a product set
-export const productSetDifference(b, a) =>
+export const productSetDifference = (b, a) =>
     Object.entries(a).reduce((prev, [k,v]) => productSetAddRemove(prev, k, v), b)
 
 
 // Checks to see if A is a subset of B (i.e B contains A)
-export const productSetContains(b, a) =>
+export const productSetContains = (b, a) =>
     Object.entries(a).every(([k,v]) => b[k] && b[k] >= v)
 
 
