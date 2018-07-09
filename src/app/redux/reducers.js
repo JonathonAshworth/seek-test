@@ -1,5 +1,7 @@
 import { combineReducers } from 'redux'
 
-export default combineReducers({
+const yeahNah = (state = 0, action) => 0
 
+export default combineReducers({
+    yeahNah,
 })

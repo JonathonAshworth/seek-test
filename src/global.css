@@ -1,0 +1,12 @@
+/* Reset */
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+html {
+    /* I like to use existing fonts instead of loading one over the web
+       unless I have a good reason. These look fine and load instantly */
+    font-family: "Helvetica Neue", "Calibri Light", Roboto, sans-serif;
+}
