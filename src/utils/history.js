@@ -1,3 +1,6 @@
+// Simple routing pattern for a small app
+// This won't handle back/forward buttons
+
 const onChangeListeners = [];
 
 export const push = function (pathname) {

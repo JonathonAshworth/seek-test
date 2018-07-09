@@ -12,12 +12,12 @@ export const productSetAddRemove = (dict, productId, delta) => {
     const newDict = { ...dict }
 
     if (newDict.hasOwnProperty(productId)) {
-        newDict[productId] = newInv[productId] += delta
+        newDict[productId] = newDict[productId] += delta
     } else {
         newDict[productId] = delta
     }
 
-    return objectFilter(dict, i => i !== 0)
+    return objectFilter(newDict, i => i !== 0)
 }
 
 

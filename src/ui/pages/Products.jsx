@@ -1,12 +1,17 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import composeStyledComponent from '../../utils/composeStyledComponent.jsx'
+import { cartAddItem } from '../../app/redux/actionCreators.js'
+import { getCartItemCount } from '../../app/redux/selectors.js'
+
+import Link from '../Link.jsx'
 
 
 const productTypes = [
-    { name: 'Classic', features: [true, false, false, false] },
-    { name: 'Standout', features: [true, true, true, false] },
-    { name: 'Premium', features: [true, true, true, true] },
+    { id: 'classic', name: 'Classic', features: [true, false, false, false] },
+    { id: 'standout', name: 'Standout', features: [true, true, true, false] },
+    { id: 'premium', name: 'Premium', features: [true, true, true, true] },
 ]
 
 const featureStrings = [
@@ -17,7 +22,16 @@ const featureStrings = [
 ]
 
 
-const Products = ({ styles }) =>
+const mapStateToProps = state => ({
+    cartItemCount: getCartItemCount(state),
+})
+
+const mapDispatchToProps = dispatch => ({
+    addItemToCart: (id) => dispatch(cartAddItem(id)),
+})
+
+
+const Products = ({ styles, ...props }) =>
     <div style={styles.container}>
         <div style={styles.productContainer}>
             {productTypes.map(productType =>
@@ -29,11 +43,16 @@ const Products = ({ styles }) =>
                             <p>{featureString}</p>
                         </div>
                     )}
-                    <button style={styles.button}>Add to Cart</button>
+                    <button
+                        style={styles.button}
+                        onClick={() => { props.addItemToCart(productType.id) }}
+                    >
+                        Add to Cart
+                    </button>
                 </div>
             )}
         </div>
-        <button style={styles.button}>Go To Cart (n items)</button>
+        <Link href='/cart' style={styles.button}>Go To Cart ({props.cartItemCount} items)</Link>
     </div>
 
 
@@ -71,10 +90,13 @@ const styles = props => ({
         border: '1px solid #888',
         borderRadius: '20px',
         padding: '10px 20px',
-        marginTop: '20px',
+        marginTop: '30px',
+        cursor: 'pointer',
+        backgroundColor: '#eee',
     },
 
 })
 
-
-export default composeStyledComponent(Products, styles)
+export default connect(mapStateToProps, mapDispatchToProps)(
+    composeStyledComponent(Products, styles)
+)
