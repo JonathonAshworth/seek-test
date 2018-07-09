@@ -10,7 +10,7 @@ const store = createStore(reducers)
 
 ReactDOM.render(
     <Provider store={store}>
-        <App />
+        <App pathname={location.pathname} />
     </Provider>,
     window.document.getElementById('app-container'),
 )

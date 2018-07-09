@@ -1,18 +1,3 @@
-/*
-    Notes
-    
-        - In a real app, the product types would obviously be pulled from a back-end
-          rather than hard-coded on the front
-
-        - I've gone for basically zero styling outside of basic positioning, but I'm
-          comfortable implementing virtually anything using css and svg, I have quite
-          a bit of experience implementing complex graphs and outside-the-box
-          visualisations by hand. In the past I've preferred to stick to standard
-          css/svg rather than out-of-the-box solutions for graphical stuff,
-          because I like the extra flexibility, and I want any designers I'm working
-          with to be unconstrained as much as possible.
-*/
-
 import React from 'react'
 
 import composeStyledComponent from '../utils/composeStyledComponent.jsx'
