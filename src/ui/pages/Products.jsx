@@ -4,25 +4,13 @@ import { connect } from 'react-redux'
 import composeStyledComponent from '../../utils/composeStyledComponent.jsx'
 import { cartAddItem } from '../../app/redux/actionCreators.js'
 import { getCartItemCount } from '../../app/redux/selectors.js'
+import { products, featureStrings } from '../../app/data.js'
 
 import Link from '../Link.jsx'
 
 
-const productTypes = [
-    { id: 'classic', name: 'Classic', features: [true, false, false, false] },
-    { id: 'standout', name: 'Standout', features: [true, true, true, false] },
-    { id: 'premium', name: 'Premium', features: [true, true, true, true] },
-]
-
-const featureStrings = [
-    'Basics',
-    'Company Logo',
-    'Longer Presentation Text',
-    'Higher Visibility',
-]
-
-
 const mapStateToProps = state => ({
+    user: state.user,
     cartItemCount: getCartItemCount(state),
 })
 
@@ -33,26 +21,33 @@ const mapDispatchToProps = dispatch => ({
 
 const Products = ({ styles, ...props }) =>
     <div style={styles.container}>
+        <p style={styles.userStatus}>
+            Currently logged in as: {props.user} (<Link href='/userselect'>change</Link>)
+        </p>
         <div style={styles.productContainer}>
-            {productTypes.map(productType =>
-                <div key={productType.name} style={styles.product}>
-                    <h1>{productType.name}</h1>
+            {Object.entries(products).map(([productId, product]) =>
+                <div key={product.name} style={styles.product}>
+                    <h1>{product.name}</h1>
                     {featureStrings.map((featureString, index) =>
                         <div key={featureString} style={styles.feature}>
-                            <div style={styles.icon}>{productType.features[index] ? '✔' : '✘'}</div>
+                            <div style={styles.icon}>
+                                {product.features[index] ? '✔' : '✘'}
+                            </div>
                             <p>{featureString}</p>
                         </div>
                     )}
                     <button
                         style={styles.button}
-                        onClick={() => { props.addItemToCart(productType.id) }}
+                        onClick={() => { props.addItemToCart(productId) }}
                     >
                         Add to Cart
                     </button>
                 </div>
             )}
         </div>
-        <Link href='/cart' style={styles.button}>Go To Cart ({props.cartItemCount} items)</Link>
+        <Link href='/cart' style={styles.button}>
+            Go To Cart ({props.cartItemCount} items)
+        </Link>
     </div>
 
 
@@ -64,6 +59,10 @@ const styles = props => ({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+
+    userStatus: {
+        margin: '20px 0',
     },
 
     productContainer: {

@@ -1,8 +1,25 @@
-export const productPriceList = {
-    classic: 26999,
-    standout: 32299,
-    premium: 39499,
+// All the stuff that would normally be pulled from the back-end via api
+
+
+export const products = {
+    classic: { name: 'Classic', price: 26999, features: [true, false, false, false] },
+    standout: { name: 'Standout', price: 32299, features: [true, true, true, false] },
+    premium: { name: 'Premium', price: 39499, features: [true, true, true, true] },
 }
+
+export const featureStrings = [
+    'Basics',
+    'Company Logo',
+    'Longer Presentation Text',
+    'Higher Visibility',
+]
+
+export const users = [
+    'default',
+    'Unilever',
+    'Apple',
+    'Nike',
+]
 
 /*
     ProductSet: dict { string (productId): number (quantity) }
@@ -17,7 +34,7 @@ export const pricingRules = [
     {
         customerId: 'Unilever',
         productSet: { classic: 3 },
-        price: productPriceList.classic * 2,
+        price: products['classic'].price * 2,
         requirements: [],
     },
     {

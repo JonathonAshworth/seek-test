@@ -23,7 +23,7 @@ export const productSetAddRemove = (dict, productId, delta) => {
 
 // Immutably performs a B diff A (aka B\A) on a product set
 export const productSetDifference = (b, a) =>
-    Object.entries(a).reduce((prev, [k,v]) => productSetAddRemove(prev, k, v), b)
+    Object.entries(a).reduce((prev, [k,v]) => productSetAddRemove(prev, k, -v), b)
 
 
 // Checks to see if A is a subset of B (i.e B contains A)
