@@ -14,10 +14,7 @@ export default (customerId, cart) => {
             && productSetContains(remaining, rule.productSet)
         )
 
-        if (!ruleMatch) {
-            console.log('no more matches, returning')
-            return { remaining, accCost }
-        }
+        if (!ruleMatch) return { remaining, accCost }
 
         return applyPricingRules(
             productSetDifference(remaining, ruleMatch.productSet),

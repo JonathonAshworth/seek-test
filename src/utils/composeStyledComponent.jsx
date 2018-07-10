@@ -6,7 +6,7 @@ import React from 'react'
 
 // Also implements declarative style composition, similar to css modules
 
-const resolveComposition = styles =>
+export const resolveComposition = styles =>
     Object.entries(styles).reduce((prev, [key, value]) =>
         typeof value !== 'object' || !value.hasOwnProperty('composes')
             ? { ...prev, [key]: value }

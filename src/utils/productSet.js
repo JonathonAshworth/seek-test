@@ -1,13 +1,4 @@
-/*
-    Immutably add or remove items from a product set
-    Examples:
-        - Adding
-            ({ classic: 3 }, 'classic', 2) => ({ classic: 5 })
-        - Removing
-            ({ standout: 1 }, 'standout', -1) => ({})
-        - Handling of negatives
-            ({ premium: 3 }, 'premium', -4) => ({})
-*/
+// Immutably add or remove items from a product set
 export const productSetAddRemove = (dict, productId, delta) => {
     const newDict = { ...dict }
 
@@ -17,7 +8,7 @@ export const productSetAddRemove = (dict, productId, delta) => {
         newDict[productId] = delta
     }
 
-    return objectFilter(newDict, i => i !== 0)
+    return objectFilter(newDict, i => i > 0)
 }
 
 
@@ -31,7 +22,7 @@ export const productSetContains = (b, a) =>
     Object.entries(a).every(([k,v]) => b[k] && b[k] >= v)
 
 
-const objectFilter = (obj, filterFunc) =>
+export const objectFilter = (obj, filterFunc) =>
     Object.entries(obj)
         .filter(([k,v]) => filterFunc(v))
         .reduce((prev, [k,v]) => ({

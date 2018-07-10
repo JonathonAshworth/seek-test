@@ -12,10 +12,15 @@
     "redux": "^4.0.0"
   },
   "devDependencies": {
+    "babel-jest": "^23.2.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "jest": "^23.3.0",
     "parcel-bundler": "^1.8.1"
   },
   "scripts": {
-    "dev-server": "parcel src/index.html"
+    "dev-server": "parcel src/index.html",
+    "test": "jest"
   }
 }
